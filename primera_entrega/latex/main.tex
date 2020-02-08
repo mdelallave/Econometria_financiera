@@ -1,0 +1,357 @@
+\documentclass[12pt]{article}
+%\usepackage[utf8]{inputenc} %Paquete para poder poner acentos desde el teclado. No lo necesitamos con XeLaTeX si usamos \usepackage{fontspec}
+\usepackage{fontspec} %Paquete de fuentes avanzado (sólo XeLaTeX)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FUENTES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\usepackage{mathptmx} %Times New Roman
+%\setmainfont{Arial} %Arial. Sólo XeLaTeX
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PAQUETES BÁSICOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\usepackage[spanish]{babel} %Paquete para que el documento esté en español. Quitar "spanish" para tener el índice en inglés
+\usepackage{polyglossia} %Paquete igual que "babel" pero para XeLaTex. Permite eliminar la primera sangría con otro comando (ver sección "Distancias".
+\setmainlanguage{spanish} %Lenguaje del texto cuando usas polyglossia
+\usepackage{eurosym} %Paquete para poder meter el símbolo €
+\usepackage{amsmath} %Paquete básico para matemáticas
+\usepackage{graphicx} %Paquete para incluir imágenes
+\usepackage{hyperref} %Paquete para poder poner hipervínculos
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Teoría del crecimiento - Manuel de la Llave},
+    bookmarksopen=true,
+    citecolor=RawSienna,
+} %Opciones de los hipervínculos y cross references.
+\usepackage{cleveref} %Paquete para mejorar las referencias cruzadas.
+\usepackage{enumerate} %Paquete para cambiar los números en las listas numeradas
+\usepackage{enumitem} %Paquete para modificar las listas
+\usepackage{multicol} %Paquete para crear multicolumnas
+\usepackage{parskip} %Paquete para que se espacien los párrafos
+\usepackage{array} %Paquete para dar mejor formato a las tablas
+\usepackage{rotating} %Paquete para poder rotar tablas
+\usepackage{float} %Paquete para colocar mejor las imágenes
+\usepackage{csquotes} %Paquete para mejorar la edición de citas
+\usepackage[nottoc]{tocbibind} %Paquete para añadir la bibliografía y otros elementos a la table of contents. nottoc = Not Table of Contents. Se puede poner notbib, notindex, etc.
+\usepackage{epigraph} %Paquete para poder poner epígrafes
+\usepackage{dirtytalk} %Paquete para poner citas usando \say{}
+\usepackage[normalem]{ulem} %Paquete para subrayar (underline); normalem se usa para que no sutituya las itálicas por subrayados para enfatizar.
+\useunder{\uline}{\ul}{} %Para personalizar el subrayado.
+\usepackage{lscape} %Paquete para poder rotar páginas.
+\usepackage{geometry}%Paquete para modificar los márgenes de manera más avanzada.
+\usepackage{cancel} %Paquete para cancelar (tachar) elementos 
+\usepackage[dvipsnames]{xcolor} %Paquete para aumentar las opciones de cambiar colores.
+\usepackage{unicode-math} %Paquete para implementar unicode maths. Por ejemplo, para la epsilon mayúscula, \Eulerconst, necesita este paquete.
+\usepackage[stable]{footmisc} %Paquete para dar más opciones en los footnote. Stable para poder poner footnotes en las cabeceras de las secciones y subsecciones.
+\usepackage{optidef} %Paquete para problemas de optimización con \begin{mini/maxi}
+\usepackage{pdfpages} %Paquete para incluir páginas de PDF en el documento.
+\usepackage{bibentry} %Paquete para no incluir la sección bibliografía usando \nobibliography{name.bib} pero seguir citando
+\usepackage{verbatim} %Paquete para hacer más cosas con verbatim
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BIBLIOGRAFÍA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\usepackage{natbib}
+\bibliographystyle{agsm} %Formato Harvard
+\setcitestyle{authoryear-ibid,open={(},close={)}} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CAMBIOS DISTANCIAS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\geometry{
+ a4paper,
+ left=30mm,
+ right=30mm,
+ top=25mm,
+ bottom=25mm,
+ heightrounded, % Ensures the height is adjusted so that an integer number of lines are accommodated in the text block.
+ } 
+\setlength{\parskip}{0cm} %Distancia entre párrafos. El plus y minus es el margen que le das a LaTeX para modificar el espaciado si lo considera necesario
+\setlength{\parindent}{0.4cm} %Sangría
+\renewcommand{\baselinestretch}{1.5} %Espaciado entre líneas. Por defecto es 1.
+\PolyglossiaSetup{spanish}{indentfirst=false}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NUEVOS COMANDOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Keywords command
+\providecommand{\keywords}[1]
+{
+  \small	
+  \textbf{\textit{Palabras clave:}} #1
+}
+
+\providecommand{\ie}
+{
+\textit{i.e.}
+}
+
+%Fuente dentro del caption en las figuras
+\newcommand*{\captionsource}[2]{%
+  \caption[{#1}]{%
+    #1%
+    \\\hspace{\linewidth}%
+    \textbf{Fuente:} #2%
+  }%
+}
+
+
+\addto{\captionsspanish}{\renewcommand{\refname}{Bibliografía}} %Para cambiar el nombre de la bibliogradía usando el paquete "babel". "refname" para "article", "bibname" para "book" o "report". Si no usas babel, con \renewcommand{\bibname}{Bibliografía} es suficiente
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% OTROS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\numberwithin{equation}{section} %Para enumerar las ecuaciones por sección.
+\setcounter{secnumdepth}{0} %Para que párrafos y subpárrafos cuenten como secciones en el índice, nivel de profundidad 4 y 5 respectivamente. 0 Para que no se numere el índice.
+\setcounter{tocdepth}{3} %Nivel de profundidad de la Table Of Contents
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}} %Comando para poner símbolos sobre el nombre del autor
+
+
+
+\begin{titlepage} %
+
+	\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for horizontal lines, change thickness here
+	
+	\center % Centre everything on the page
+	
+	%------------------------------------------------
+	%	Headings
+	%------------------------------------------------
+	
+	%\includegraphics[width=\textwidth]{Images/spain.jpg}\\[1cm]
+	
+	%\textsc{\LARGE Universidad de Valencia}\\[1.5cm] % Main heading such as the name of your university/college
+	
+	%\textsc{\Large Facultad de Economía}\\[0.5cm] % Major heading such as course name
+	
+	%\textsc{\large Minor Heading}\\[0.5cm] % Minor heading such as course title
+	
+	%------------------------------------------------
+	%	Title
+	%------------------------------------------------
+	
+	\HRule\\[0.4cm]
+	
+	{\huge\bfseries Primera práctica de evaluación
+	}\\[0.4cm] % Title of your document
+	
+	\HRule\\[1.5cm]
+	
+	\vfill
+	%------------------------------------------------
+	%	Author(s)
+	%------------------------------------------------
+	%\begin{multicols}{2}
+	%\begin{minipage}{0.4\textwidth}
+		%\begin{flushleft}
+			\large
+			\textit{Autor}\\
+			Manuel \textsc{de la Llave}\footnote{llave@alumni.uv.es}
+			\\
+			%\columnbreak
+		%\end{flushleft}
+	%\end{minipage}
+	~
+	%\begin{minipage}{0.4\textwidth}
+	%	\begin{flushright}
+			%\large
+			%\textit{Profesor}\\
+			%Vicente \textsc{Esteve} % Supervisor's name
+	%	\end{flushright}
+	%\end{minipage}
+	%\end{multicols}
+	% If you don't want a supervisor, uncomment the two lines below and comment the code above
+	%{\large\textit{Author}}\\
+	%John \textsc{Smith} % Your name
+	
+	%------------------------------------------------
+	%	Date
+	%------------------------------------------------
+	
+	\vfill\vfill\vfill % Position the date 3/4 down the remaining page
+	
+	{\large 7 de Febrero de 2020} % Date, change the \today to a set date if you want to be precise
+	
+	%------------------------------------------------
+	%	Logo
+	%------------------------------------------------
+	
+	%\vfill\vfill
+	%\includegraphics[width=0.2\textwidth]{logouv.png}\\[1cm] % Include a department/university logo - this will require the graphicx package
+	 
+	%----------------------------------------------------------------------------------------
+	
+	\vfill % Push the date up 1/4 of the remaining page
+	
+\end{titlepage}
+
+
+\clearpage
+\tableofcontents
+\clearpage
+
+
+\setcounter{footnote}{0} %Para que la página del título no cuente como página a la hora de numerar.
+\renewcommand*{\thefootnote}{\arabic{footnote}} %Para que las notas al pie vuelvan a ser 1, 2, 3, etc. y no el símbolo como en el autor.
+
+Considera el modelo de tres factores:
+
+$$HiTec − R_f = \beta_1 + \beta_2(R_m-R_f) + \beta_3smb + \beta_4hml + u$$
+
+\section{Ejercicio 1} Estima la regresión lineal y muestra los resultados. Interpreta cada uno de los coeficientes del modelo.
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{lrrrr}
+\multicolumn{3}{l}{Dependent Variable: HITEC-RF}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\
+\multicolumn{2}{l}{Method: Least Squares}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\
+\multicolumn{2}{l}{Date: 08/02/20   Time: 20:16}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\
+\multicolumn{2}{l}{Sample: 1926M07 2015M12}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\
+\multicolumn{3}{l}{Included observations: 1074}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\
+[4.5pt] \hline \\ [-4.5pt]
+\multicolumn{1}{c}{Variable}&\multicolumn{1}{r}{Coefficient}&\multicolumn{1}{r}{Std. Error}&\multicolumn{1}{r}{t-Statistic}&\multicolumn{1}{r}{Prob.}\\
+[4.5pt] \hline \\ [-4.5pt]
+\multicolumn{1}{c}{C}&\multicolumn{1}{r}{$0.138453$}&\multicolumn{1}{r}{$0.063893$}&\multicolumn{1}{r}{$2.166956$}&\multicolumn{1}{r}{$0.0305$}\\
+\multicolumn{1}{c}{RMRF}&\multicolumn{1}{r}{$0.986237$}&\multicolumn{1}{r}{$0.012658$}&\multicolumn{1}{r}{$77.91150$}&\multicolumn{1}{r}{$0.0000$}\\
+\multicolumn{1}{c}{SMB}&\multicolumn{1}{r}{$0.041632$}&\multicolumn{1}{r}{$0.020747$}&\multicolumn{1}{r}{$2.006691$}&\multicolumn{1}{r}{$0.0450$}\\
+\multicolumn{1}{c}{HML}&\multicolumn{1}{r}{$-0.319994$}&\multicolumn{1}{r}{$0.018407$}&\multicolumn{1}{r}{$-17.38404$}&\multicolumn{1}{r}{$0.0000$}\\
+[4.5pt] \hline \\ [-4.5pt]
+\multicolumn{1}{l}{R-squared}&\multicolumn{1}{r}{$0.864345$}&\multicolumn{2}{l}{Mean dependent var}&\multicolumn{1}{r}{$0.663892$}\\
+\multicolumn{1}{l}{Adjusted R-squared}&\multicolumn{1}{r}{$0.863965$}&\multicolumn{2}{l}{S.D. dependent var}&\multicolumn{1}{r}{$5.615646$}\\
+\multicolumn{1}{l}{S.E. of regression}&\multicolumn{1}{r}{$2.071217$}&\multicolumn{2}{l}{Akaike info criterion}&\multicolumn{1}{r}{$4.297867$}\\
+\multicolumn{1}{l}{Sum squared resid}&\multicolumn{1}{r}{$4590.235$}&\multicolumn{2}{l}{Schwarz criterion}&\multicolumn{1}{r}{$4.316411$}\\
+\multicolumn{1}{l}{Log likelihood}&\multicolumn{1}{r}{$-2303.955$}&\multicolumn{2}{l}{Hannan-Quinn criter.}&\multicolumn{1}{r}{$4.304891$}\\
+\multicolumn{1}{l}{F-statistic}&\multicolumn{1}{r}{$2272.552$}&\multicolumn{2}{l}{Durbin-Watson stat}&\multicolumn{1}{r}{$1.911409$}\\
+\multicolumn{1}{l}{Prob(F-statistic)}&\multicolumn{1}{r}{$0.000000$}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\
+[4.5pt] \hline \\ [-4.5pt]
+\end{tabular}
+%\caption{Add your caption here.}
+%\label{tab:}
+\end{table}
+
+\section{Ejercicio 2} Haz una validación completa de las hipótesis de incorrelación, homocedasticidad y normalidad de los residuos.
+
+\section{Ejercicio 3} Contrasta mediante la prueba de Wald si el modelo con un factor es suficiente $H_0: \beta_3 = \beta_4 = 0$
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{lrrr}
+\multicolumn{1}{l}{Wald Test:}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\
+\multicolumn{2}{l}{Equation: EQ1}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\
+[4.5pt] \hline \\ [-4.5pt]
+\multicolumn{1}{l}{Test Statistic}&\multicolumn{1}{c}{Value}&\multicolumn{1}{c}{df}&\multicolumn{1}{c}{Probability}\\
+[4.5pt] \hline \\ [-4.5pt]
+\multicolumn{1}{l}{t-statistic}&\multicolumn{1}{c}{$12.77794$}&\multicolumn{1}{c}{$1070$}&\multicolumn{1}{c}{$0.0000$}\\
+\multicolumn{1}{l}{F-statistic}&\multicolumn{1}{c}{$163.2757$}&\multicolumn{1}{c}{(1, 1070)}&\multicolumn{1}{c}{$0.0000$}\\
+\multicolumn{1}{l}{Chi-square}&\multicolumn{1}{c}{$163.2757$}&\multicolumn{1}{c}{$1$}&\multicolumn{1}{c}{$0.0000$}\\
+[4.5pt] \hline \\ [-4.5pt]
+\multicolumn{1}{c}{}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\
+\multicolumn{2}{l}{Null Hypothesis: C(3) = C(4)}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\
+\multicolumn{2}{l}{Null Hypothesis Summary:}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\
+[4.5pt] \hline \\ [-4.5pt]
+\multicolumn{2}{l}{Normalized Restriction (= 0)}&\multicolumn{1}{c}{Value}&\multicolumn{1}{c}{Std. Err.}\\
+[4.5pt] \hline \\ [-4.5pt]
+\multicolumn{2}{l}{C(3) - C(4)}&\multicolumn{1}{c}{$0.361626$}&\multicolumn{1}{c}{$0.028301$}\\
+[4.5pt] \hline \\ [-4.5pt]
+\multicolumn{3}{l}{Restrictions are linear in coefficients.}&\multicolumn{1}{c}{}\\
+\end{tabular}
+%\caption{Add your caption here.}
+%\label{tab:}
+\end{table}
+
+\section{Ejercicio 4} Estamos interesados en analizar el posible efecto no lineal de \textit{smb} sobre el exceso de rendimiento de la cartera de Bienes de equipo y Comunicación \textit{(HiTec-Rf)}. Añade en el modelo la variable \textit{smb} al cuadrado e identifica el nuevo efecto marginal de \textit{smb} sobre el consumo. Contrasta si efectivamente este término cuadrático es necesario y explica las consecuencias que se derivan del resultado del contraste.
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{lrrrr}
+\multicolumn{3}{l}{Dependent Variable: HITEC-RF}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\
+\multicolumn{2}{l}{Method: Least Squares}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\
+\multicolumn{2}{l}{Date: 08/02/20   Time: 20:22}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\
+\multicolumn{2}{l}{Sample: 1926M07 2015M12}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\
+\multicolumn{3}{l}{Included observations: 1074}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\
+[4.5pt] \hline \\ [-4.5pt]
+\multicolumn{1}{c}{Variable}&\multicolumn{1}{r}{Coefficient}&\multicolumn{1}{r}{Std. Error}&\multicolumn{1}{r}{t-Statistic}&\multicolumn{1}{r}{Prob.}\\
+[4.5pt] \hline \\ [-4.5pt]
+\multicolumn{1}{c}{C}&\multicolumn{1}{r}{$0.101179$}&\multicolumn{1}{r}{$0.064784$}&\multicolumn{1}{r}{$1.561796$}&\multicolumn{1}{r}{$0.1186$}\\
+\multicolumn{1}{c}{RMRF}&\multicolumn{1}{r}{$0.986607$}&\multicolumn{1}{r}{$0.012609$}&\multicolumn{1}{r}{$78.24507$}&\multicolumn{1}{r}{$0.0000$}\\
+\multicolumn{1}{c}{SMB}&\multicolumn{1}{r}{$0.012106$}&\multicolumn{1}{r}{$0.022784$}&\multicolumn{1}{r}{$0.531339$}&\multicolumn{1}{r}{$0.5953$}\\
+\multicolumn{1}{c}{HML}&\multicolumn{1}{r}{$-0.330318$}&\multicolumn{1}{r}{$0.018639$}&\multicolumn{1}{r}{$-17.72158$}&\multicolumn{1}{r}{$0.0000$}\\
+\multicolumn{1}{c}{SMB\textasciicircum 2}&\multicolumn{1}{r}{$0.004536$}&\multicolumn{1}{r}{$0.001474$}&\multicolumn{1}{r}{$3.077388$}&\multicolumn{1}{r}{$0.0021$}\\
+[4.5pt] \hline \\ [-4.5pt]
+\multicolumn{1}{l}{R-squared}&\multicolumn{1}{r}{$0.865536$}&\multicolumn{2}{l}{Mean dependent var}&\multicolumn{1}{r}{$0.663892$}\\
+\multicolumn{1}{l}{Adjusted R-squared}&\multicolumn{1}{r}{$0.865033$}&\multicolumn{2}{l}{S.D. dependent var}&\multicolumn{1}{r}{$5.615646$}\\
+\multicolumn{1}{l}{S.E. of regression}&\multicolumn{1}{r}{$2.063067$}&\multicolumn{2}{l}{Akaike info criterion}&\multicolumn{1}{r}{$4.290909$}\\
+\multicolumn{1}{l}{Sum squared resid}&\multicolumn{1}{r}{$4549.927$}&\multicolumn{2}{l}{Schwarz criterion}&\multicolumn{1}{r}{$4.314090$}\\
+\multicolumn{1}{l}{Log likelihood}&\multicolumn{1}{r}{$-2299.218$}&\multicolumn{2}{l}{Hannan-Quinn criter.}&\multicolumn{1}{r}{$4.299689$}\\
+\multicolumn{1}{l}{F-statistic}&\multicolumn{1}{r}{$1720.274$}&\multicolumn{2}{l}{Durbin-Watson stat}&\multicolumn{1}{r}{$1.885307$}\\
+\multicolumn{1}{l}{Prob(F-statistic)}&\multicolumn{1}{r}{$0.000000$}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\
+[4.5pt] \hline \\ [-4.5pt]
+\end{tabular}
+%\caption{Add your caption here.}
+%\label{tab:}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{lrrr}
+\multicolumn{1}{l}{Wald Test:}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\
+\multicolumn{2}{l}{Equation: EQ2}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\
+[4.5pt] \hline \\ [-4.5pt]
+\multicolumn{1}{l}{Test Statistic}&\multicolumn{1}{c}{Value}&\multicolumn{1}{c}{df}&\multicolumn{1}{c}{Probability}\\
+[4.5pt] \hline \\ [-4.5pt]
+\multicolumn{1}{l}{t-statistic}&\multicolumn{1}{c}{$3.077388$}&\multicolumn{1}{c}{$1069$}&\multicolumn{1}{c}{$0.0021$}\\
+\multicolumn{1}{l}{F-statistic}&\multicolumn{1}{c}{$9.470314$}&\multicolumn{1}{c}{(1, 1069)}&\multicolumn{1}{c}{$0.0021$}\\
+\multicolumn{1}{l}{Chi-square}&\multicolumn{1}{c}{$9.470314$}&\multicolumn{1}{c}{$1$}&\multicolumn{1}{c}{$0.0021$}\\
+[4.5pt] \hline \\ [-4.5pt]
+\multicolumn{1}{c}{}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\
+\multicolumn{2}{l}{Null Hypothesis: C(5) = 0}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\
+\multicolumn{2}{l}{Null Hypothesis Summary:}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\
+[4.5pt] \hline \\ [-4.5pt]
+\multicolumn{2}{l}{Normalized Restriction (= 0)}&\multicolumn{1}{c}{Value}&\multicolumn{1}{c}{Std. Err.}\\
+[4.5pt] \hline \\ [-4.5pt]
+\multicolumn{2}{l}{C(5)}&\multicolumn{1}{c}{$0.004536$}&\multicolumn{1}{c}{$0.001474$}\\
+[4.5pt] \hline \\ [-4.5pt]
+\multicolumn{3}{l}{Restrictions are linear in coefficients.}&\multicolumn{1}{c}{}\\
+\end{tabular}
+%\caption{Add your caption here.}
+%\label{tab:}
+\end{table}
+
+
+\section{Ejercicio 5} Partiendo del modelo inicial, se desea ahora analizar si la beta del exceso de rendimiento en el mercado $(\beta_2)$ ha cambiado tras la segunda guerra mundial. Crea una variable ficticia, que podemos denominar \textit{d1946}, que valga cero para los datos previos a 1946 (hasta 194512) y uno a partir de enero de 1946. Añade en el modelo la $d1946*(R_m-R_f)$. ¿Cuál es ahora el efecto marginal del exceso de rendimiento en el mercado sobre del exceso de rendimiento en la cartera HiTec? Contrasta si efectivamente este efecto es diferente antes y después de la segunda guerra mundial.
+
+\section{Ejercicio 6} Estima de nuevo el modelo básico de tres factores solicitando una estimación robusta de la matriz de varianzas de los parámetros. Compara los resultados de esta estimación con la obtenida en el primer punto. Puedes probar diferentes fórmulas para la estimación de la matriz de varianzas para ver si los resultados varían.
+
+
+\section{Código}
+
+A continuación dejo el código empleado para replicar los resultados obtenidos mediante un programa de Eviews, así como mi repositorio en \href{https://github.com/mdelallave/Econometria_financiera/tree/master/primera_entrega}{GitHub}.\footnote{Colocar el fichero de datos en la misma carpeta que el programa de Eviews y en formato xls.}
+
+\verbatiminput{codigo.tex}
+
+\end{document}
