@@ -1,0 +1,40 @@
+
+
+' Creamos un fichero cuyo sample se adecue a nuestros datos
+wfcreate(wf=entrega) m 1/07/1926 2015
+
+' Importamos las series de Excel
+read(t=xls,b2) hitec.xls hitec
+read(t=xls,c2) hitec.xls rmrf
+read(t=xls,d2) hitec.xls smb
+read(t=xls,e2) hitec.xls hml
+read(t=xls,f2) hitec.xls rf
+
+' Ej.1: 
+output(x) ej1 ' Fichero de salida para los datos de interés.
+equation eq1.ls(p) hitec-rf c rmrf smb hml ' Ajuste de regresion por MCO 
+
+' Ej. 2:
+output(x) ej2
+eq1.auto(2)(p)   ' Contraste de autocorrelacion del modelo con 2 lags.
+eq1.white(p) ' Test de heterocedasticidad.
+eq1.hist(p) ' Realizamos el histograma para comprobar la normalidad.
+
+' Ej. 3:
+output(x) ej3
+eq1.wald(p) c(3) = c(4) ' Test de Wald
+
+' Ej. 4:
+output(x) ej4
+equation eq2.ls(p) hitec-rf c rmrf smb hml smb^2
+eq2.wald(p) c(5) = 0
+
+' Ej. 5:
+output(x) ej5
+series d1946=@date>@dateval("1945m12") ' Dummy variable que 
+' elimina los datos previos a 1946
+equation eq3.ls(p) hitec-rf c rmrf smb hml d1946*rmrf
+eq3.wald(p) c(5) = 0
+
+' Ej. 6:
+output(x) ej6
