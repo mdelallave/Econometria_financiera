@@ -40,7 +40,8 @@ eq3.wald(p) c(5) = c(2)
 output(x) ej6
 equation eq1_white.ls(cov=white, p) hitec-rf c rmrf smb hml 
 ' Ajuste de regresion por MCO solcitando que la matriz de var-cov
-' cumpla el test de White (sea robusta).
+' sea consistente (robusta) mediante White..
 equation eq1_hc.ls(cov=hc, p) hitec-rf c rmrf smb hml 
-' Igual pero siguiendo el criterio de Heterokedasticity autocorrelation consistent
-' (más usado). 
+' Igual pero siguiendo el criterio de Heterokedasticity consistent
+' (más usado). No uso HAC por ser incorrelado.
+
