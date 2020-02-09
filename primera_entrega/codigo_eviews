@@ -20,7 +20,7 @@ eq1.hist(p) ' Realizamos el histograma para comprobar la normalidad.
 
 ' Ej. 3:
 output(x) ej3
-eq1.wald(p) c(3) = c(4) ' Test de Wald
+eq1.wald(p) c(3) = c(4) = 0' Test de Wald
 
 ' Ej. 4:
 output(x) ej4
@@ -32,7 +32,18 @@ output(x) ej5
 series d1946=@date>@dateval("1945m12") ' Dummy variable que 
 ' elimina los datos previos a 1946
 equation eq3.ls(p) hitec-rf c rmrf smb hml d1946*rmrf
-eq3.wald(p) c(5) = 0
+eq3.wald(p) c(5) = c(2)
 
 ' Ej. 6:
 output(x) ej6
+equation eq1_white.ls(cov=white, p) hitec-rf c rmrf smb hml 
+' Ajuste de regresion por MCO solcitando que la matriz de var-cov
+' sea consistente (robusta) mediante White..
+equation eq1_hc.ls(cov=hc, p) hitec-rf c rmrf smb hml 
+' Igual pero siguiendo el criterio de Heterokedasticity consistent
+' (más usado). No uso HAC por ser incorrelado.
+
+
+
+
+
